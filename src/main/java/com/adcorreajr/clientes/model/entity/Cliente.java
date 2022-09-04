@@ -2,6 +2,7 @@ package com.adcorreajr.clientes.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,8 +10,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -29,7 +28,7 @@ public class Cliente {
     private String nome;
 
     @Column(nullable = false, length = 11)
-    @NotNull(message = "{campo.cpf.obrigatorio}")
+    @NotEmpty(message = "{campo.cpf.obrigatorio}")
     @CPF(message = "{campo.cpf.invalido}")
     private String cpf;
 
