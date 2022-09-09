@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/servicos-prestados")
+//@CrossOrigin("http://localhost:4200")
 public class ServicoPrestadoController {
 
     @Autowired
@@ -46,7 +47,7 @@ public class ServicoPrestadoController {
         servicoPrestado.setValor(bigDecimalConverter.converter(servicoPrestadoDTO.getPreco()));
         servicoPrestado.setDescricao(servicoPrestadoDTO.getDescricao());
 
-        return this.servicoPrestadoRepository.save(servicoPrestado);
+        return servicoPrestadoRepository.save(servicoPrestado);
     }
 
     @GetMapping("{id}")
@@ -56,13 +57,7 @@ public class ServicoPrestadoController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Servico não encontrado."));
     }
 
-    //@GetMapping
-    //public List<ServicoPrestado> acharTodos(){
-      //  return servicoPrestadoRepository.findAll();
-    //}
-
-
-    @GetMapping
+     @GetMapping
     public List<ServicoPrestado> buscarNomeAndData(
         @RequestParam(value = "nome", required = false, defaultValue = "") String nome,
         @RequestParam(value = "mes", required = false) Integer mes
